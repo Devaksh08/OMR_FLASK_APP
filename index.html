@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-a">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OMR Sheet Grader</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 720px;
+        }
+        .card {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-center mt-5">
+            <h1>OMR Sheet Grader</h1>
+            <p class="lead">Upload an answer key and a student's sheet to get the score.</p>
+        </div>
+
+        <!-- Section for Flashed Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="card p-4">
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="answer_key" class="form-label"><strong>1. Upload Answer Key Image</strong></label>
+                    <input class="form-control" type="file" id="answer_key" name="answer_key" required>
+                </div>
+                <div class="mb-3">
+                    <label for="student_key" class="form-label"><strong>2. Upload Student Sheet Image</strong></label>
+                    <input class="form-control" type="file" id="student_key" name="student_key" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Grade Sheet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
